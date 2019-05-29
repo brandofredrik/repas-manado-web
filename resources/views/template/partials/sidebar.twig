@@ -13,8 +13,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{base_url}}/dashboard">
+    <li class="nav-item {{ (data.path == 'home') ? 'active' : ' '}}">
+        <a class="nav-link" href="{{path_for('dash.home')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -25,20 +25,54 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Interface
+        Features
     </div>
 
+    <!-- Nav Item - Charts -->
+    <li class="nav-item {{ (data.path == 'market') ? 'active' : ' '}}">
+        <a class="nav-link" href="{{path_for('dash.market')}}">
+        <i class="fas fa-map-marker"></i>
+        <span>Market</span></a>
+    </li>
+
+
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Components</span>
+    <li class="nav-item {{ (data.path == 'building') ? 'active' : ' '}}">
+        <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#buildingMenu"
+            aria-expanded="true"
+            aria-controls="buildingMenu"
+        >
+            <i class="far fa-building"></i>
+            <span>Building</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="buildingMenu" class="collapse  {{ (data.path == 'building') ? 'show' : ' '}}" aria-labelledby="headingBuildingMenu" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {{ (data.subpath == 'type') ? 'active' : ' '}}" href="{{path_for('dash.building.type')}}"> Type</a>
+                <a class="collapse-item {{ (data.subpath == 'price') ? 'active' : ' '}}" href="{{path_for('dash.building.price')}}"> Price</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item {{ (data.path == 'merchant') ? 'active' : ' '}}">
+        <a
+            class="nav-link collapsed"
+            href="#"
+            data-toggle="collapse"
+            data-target="#merchantMenu"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+        >
+            <i class="fas fa-store"></i>
+            <span>Merchant</span>
+        </a>
+        <div id="merchantMenu" class="collapse {{ (data.path == 'merchant') ? 'show' : ' '}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
+            <a class="collapse-item {{ (data.subpath == 'owner') ? 'active' : ' '}}" href="{{path_for('dash.merchant.owner')}}">Owner</a>
+            <a class="collapse-item {{ (data.subpath == 'building') ? 'active' : ' '}}" href="{{path_for('dash.merchant.building')}}">Building</a>
         </div>
         </div>
     </li>
@@ -56,15 +90,8 @@
     <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="charts.html">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Charts</span></a>
-    </li>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Tables</span></a>
+        <i class="fas fa-chart-line"></i>
+        <span>Transaction</span></a>
     </li>
 
     <!-- Divider -->

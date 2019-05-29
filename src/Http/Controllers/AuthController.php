@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Respect\Validation\Validator;
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
 
-use Respect\Validation\Validator;
 
 class AuthController extends Controller
 {

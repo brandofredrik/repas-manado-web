@@ -1,0 +1,95 @@
+{% extends "/template/base.twig" %}
+{% block title %}Building Price{% endblock %}
+{% block body_content %}
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Building Prices</h1>
+            <a
+                href="#"
+                data-toggle="modal"
+                data-target="#addPrice"
+                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                    <i class="fas fa-plus fa-sm text-white-50"></i>
+                    Add new Price
+                </a>
+        </div>
+
+        {% include '/template/partials/flash.twig' %}
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Building Price list ({{data.prices|length}})</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="50">No</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Type</th>
+                                <th width="200">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for price in data.prices %}
+                                <tr>
+                                    <td>{{loop.index}}</td>
+                                    <td>{{price.title}}</td>
+                                    <td>{{price.description}}</td>
+                                    <td>{{price.price}}</td>
+                                    <td>
+                                        {% for type in data.types %}
+                                            {% if price.type_id == type.id %}
+                                                <span class="badge badge-primary">
+                                                    {{ type.title }}
+                                                </span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td class="text-center">
+                                        <a
+                                            href="#"
+                                            class="btn btn-success btn-icon-split btn-sm"
+                                            data-toggle="modal"
+                                            data-target="#editPrice"
+                                            data-buildingprice="{{price.id}}"
+                                        >
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-edit fa-sm text-white-55"></i>
+                                            </span>
+                                            <span class="text"> edit</span>
+                                        </a>
+                                        <a
+                                            href="#"
+                                            class="btn btn-danger btn-icon-split btn-sm"
+                                            data-toggle="modal"
+                                            data-target="#deleteModal"
+                                            onclick="deleteData({{price.id}}, 'buildings/prices')"
+                                        >
+                                            <span class="icon text-white-50">
+                                                <i class="far fa-trash-alt fa-sm text-white-55"></i>
+                                            </span>
+                                            <span class="text"> delete</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    {% include '/merchants/building_price/add.twig' %}
+    {% include '/merchants/building_price/edit.twig' %}
+
+{% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Building;
 use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
@@ -14,5 +14,11 @@ class Type extends Model
     ];
 
     public $timestamps = false;
+
+    public function price()
+    {
+        return $this->hasOne('App\Models\Building\price');
+    }
+
 
 }

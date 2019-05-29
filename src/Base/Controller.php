@@ -35,10 +35,10 @@ $container['OwnerController'] = function ($container) {
 };
 
 $container['PriceController'] = function ($container) {
-    return new \App\Http\Controllers\Merchant\PriceController($container);
+    return new \App\Http\Controllers\Building\PriceController($container);
 };
 
 $container['TypeController'] = function ($container) {
-    return new \App\Http\Controllers\Merchant\TypeController($container);
+    return new \App\Http\Controllers\Building\TypeController($container);
 };
 

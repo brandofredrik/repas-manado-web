@@ -1,11 +1,11 @@
 {% if flash.getMessage('info') %}
-    <div class="alert alert-info" style="margin-top:20px;">
+    <div class="alert alert-info" style="margin-top:20px;" id="flash_message">
         {{ flash.getMessage('info') | first }}
     </div>
 {% endif %}
 
 {% if flash.getMessage('error') %}
-    <div class="alert alert-danger" style="margin-top:20px;">
+    <div class="alert alert-danger" style="margin-top:20px;" id="flash_message">
         {{ flash.getMessage('error') | first }}
      </div>
 {% endif %}

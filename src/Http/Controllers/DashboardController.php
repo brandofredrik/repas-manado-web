@@ -9,7 +9,10 @@ class DashboardController extends Controller
 
     public function index($request, $response)
     {
-        return $this->view->render($response, 'index.twig');
+        $data = [
+            'path' => 'home'
+        ];
+        return $this->view->render($response, 'index.twig', compact('data'));
     }
 
 }

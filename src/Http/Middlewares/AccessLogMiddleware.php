@@ -10,10 +10,10 @@ class AccessLogMiddleware extends Middleware
 
         $route = $request->getAttribute('route');
         $this->container->logger->info(
-            'Request: ' . $request->getMethod() . ' ' . $route->getPattern(),
-            [
-                $route->getArguments()
-            ]
+            'Request: ' . $request->getMethod() . ' ' /** . $route->getPattern(),
+            *[
+            *    $route->getArguments()
+            *] */
         );
         $response = $next($request, $response);
         $this->container->logger->info(

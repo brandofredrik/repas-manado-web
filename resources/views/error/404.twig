@@ -2,22 +2,18 @@
 {% block title %}404{% endblock %}
 {% block body_content %}
 
-    <div class="flex-center position-ref full-height">
-        <div class="content">
-            <div class="title m-b-md">
-                <div style="font-size:200px">
-                    404
-                </div>
-                <div style="font-size:30px">
-                    Page not found!
-                </div>
-            </div>
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
+      <!-- 404 Error Text -->
+      <div class="text-center">
+        <div class="error mx-auto" data-text="404">404</div>
+        <p class="lead text-gray-800 mb-5">Page Not Found</p>
+        <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
+        <a href="{{base_url}}/dashboard">&larr; Back to Dashboard</a>
+      </div>
 
-            <div class="links">
-                <a href="/">back home</a>
-            </div>
-        </div>
     </div>
+    <!-- /.container-fluid -->
 
 {% endblock %}

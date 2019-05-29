@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Building;
 use Illuminate\Database\Eloquent\Model;
 
 class Price extends Model
@@ -16,5 +16,11 @@ class Price extends Model
     ];
 
     public $timestamps = false;
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Building\Type');
+    }
+
 
 }

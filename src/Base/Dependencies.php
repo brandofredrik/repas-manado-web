@@ -3,8 +3,8 @@
 use Illuminate\Database\Capsule\Manager as Eloquent;
 use Respect\Validation\Validator as RespectValidation;
 use PHPMailer\PHPMailer\PHPMailer;
-use App\Validations\Validator;
-use App\Mailers\Mailer;
+use App\Base\Validations\Validator;
+use App\Base\Mailers\Mailer;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Slim\Views\Twig;

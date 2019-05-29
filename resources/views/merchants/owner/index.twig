@@ -1,0 +1,28 @@
+{% extends "/template/base.twig" %}
+{% block title %}Merchant Owner{% endblock %}
+{% block body_content %}
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Merchant Owner</h1>
+            <a
+                href="#"
+                data-toggle="modal"
+                data-target="#addMarket"
+                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                    <i class="fas fa-plus fa-sm text-white-50"></i>
+                    Add new Owner
+                </a>
+        </div>
+
+        {% include '/template/partials/flash.twig' %}
+
+    </div>
+    <!-- /.container-fluid -->
+
+    {# {% include '/markets/add.twig' %} #}
+    {# {% include '/markets/edit.twig' %} #}
+
+{% endblock %}
