@@ -20,80 +20,99 @@
         </a>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+    {% if (auth.user.role[0].id == 1) %}
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Features
-    </div>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Features
+        </div>
 
-    <!-- Nav Item - Charts -->
-    <li class="nav-item {{ (data.path == 'market') ? 'active' : ' '}}">
-        <a class="nav-link" href="{{path_for('dash.market')}}">
-        <i class="fas fa-map-marker"></i>
-        <span>Market</span></a>
-    </li>
+        <!-- Nav Item - Charts -->
+        <li class="nav-item {{ (data.path == 'market') ? 'active' : ' '}}">
+            <a class="nav-link" href="{{path_for('dash.market')}}">
+            <i class="fas fa-map-marker"></i>
+            <span>Market</span></a>
+        </li>
 
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item {{ (data.path == 'building') ? 'active' : ' '}}">
-        <a
-            class="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#buildingMenu"
-            aria-expanded="true"
-            aria-controls="buildingMenu"
-        >
-            <i class="far fa-building"></i>
-            <span>Building</span>
-        </a>
-        <div id="buildingMenu" class="collapse  {{ (data.path == 'building') ? 'show' : ' '}}" aria-labelledby="headingBuildingMenu" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item {{ (data.subpath == 'type') ? 'active' : ' '}}" href="{{path_for('dash.building.type')}}"> Type</a>
-                <a class="collapse-item {{ (data.subpath == 'price') ? 'active' : ' '}}" href="{{path_for('dash.building.price')}}"> Price</a>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {{ (data.path == 'building') ? 'active' : ' '}}">
+            <a
+                class="nav-link collapsed"
+                href="#"
+                data-toggle="collapse"
+                data-target="#buildingMenu"
+                aria-expanded="true"
+                aria-controls="buildingMenu"
+            >
+                <i class="far fa-building"></i>
+                <span>Building</span>
+            </a>
+            <div id="buildingMenu" class="collapse  {{ (data.path == 'building') ? 'show' : ' '}}" aria-labelledby="headingBuildingMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item {{ (data.subpath == 'type') ? 'active' : ' '}}" href="{{path_for('dash.building.type')}}"> Type</a>
+                    <a class="collapse-item {{ (data.subpath == 'price') ? 'active' : ' '}}" href="{{path_for('dash.building.price')}}"> Price</a>
+                </div>
             </div>
+        </li>
+
+        <li class="nav-item {{ (data.path == 'merchant') ? 'active' : ' '}}">
+            <a
+                class="nav-link collapsed"
+                href="#"
+                data-toggle="collapse"
+                data-target="#merchantMenu"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+            >
+                <i class="fas fa-store"></i>
+                <span>Merchant</span>
+            </a>
+            <div id="merchantMenu" class="collapse {{ (data.path == 'merchant') ? 'show' : ' '}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {{ (data.subpath == 'owner') ? 'active' : ' '}}" href="{{path_for('dash.merchant.owner')}}">Owner</a>
+                <a class="collapse-item {{ (data.subpath == 'building') ? 'active' : ' '}}" href="{{path_for('dash.merchant.building')}}">Building</a>
+            </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Addons
         </div>
-    </li>
 
-    <li class="nav-item {{ (data.path == 'merchant') ? 'active' : ' '}}">
-        <a
-            class="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#merchantMenu"
-            aria-expanded="false"
-            aria-controls="collapseTwo"
-        >
-            <i class="fas fa-store"></i>
-            <span>Merchant</span>
-        </a>
-        <div id="merchantMenu" class="collapse {{ (data.path == 'merchant') ? 'show' : ' '}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item {{ (data.subpath == 'owner') ? 'active' : ' '}}" href="{{path_for('dash.merchant.owner')}}">Owner</a>
-            <a class="collapse-item {{ (data.subpath == 'building') ? 'active' : ' '}}" href="{{path_for('dash.merchant.building')}}">Building</a>
+        <!-- Nav Item - transaction -->
+        <li class="nav-item {{ (data.path == 'transaction') ? 'active' : ' '}}">
+            <a class="nav-link" href="{{path_for('dash.transaction')}}">
+            <i class="fas fa-chart-line"></i>
+            <span>Transactions</span></a>
+        </li>
+        <!-- Nav Item - history -->
+        <li class="nav-item {{ (data.path == 'history') ? 'active' : ' '}}">
+            <a class="nav-link" href="#">
+            <i class="fas fa-history"></i>
+            <span>Histories</span></a>
+        </li>
+    {% endif %}
+
+    {# collector menu #}
+    {% if (auth.user.role[0].id == 2) %}
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Addons
         </div>
-        </div>
-    </li>
 
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Addons
-    </div>
-
-
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-        <i class="fas fa-chart-line"></i>
-        <span>Transaction</span></a>
-    </li>
-
+         <!-- Nav Item - collecting -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>Collecting</span></a>
+        </li>
+    {% endif %}
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

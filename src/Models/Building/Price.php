@@ -22,5 +22,10 @@ class Price extends Model
         return $this->belongsTo('App\Models\Building\Type');
     }
 
+    public function building()
+    {
+        return $this->hasMany('App\Models\Merchant\Building');
+    }
+
 
 }

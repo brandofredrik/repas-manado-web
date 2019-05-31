@@ -1,0 +1,76 @@
+<!-- Logout Modal-->
+<div
+    class="modal fade"
+    id="editBuilding"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog" role="document">
+        <form action="{{ path_for('dash.merchant.building.update') }}"  method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Building</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id" name="id">
+                    <div class="form-group">
+                        <label for="name">Register Number </label>
+                        <input type="text" class="form-control" id="register_number" name="register_number" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="owner_id">Owner</label>
+                        <select class="form-control" id="owner_id" name="owner_id">
+                            {% for owner in data.owners %}
+                                <option value="{{owner.id}}">{{owner.name}}</option>
+                            {% endfor %}+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" name="description">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="widht">Widht</label>
+                            <input type="number" class="form-control" id="widht" name="widht">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="length">Length</label>
+                            <input type="number" class="form-control" id="length" name="length">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="market_id">Market</label>
+                        <select class="form-control" id="market_id" name="market_id">
+                            {% for market in data.markets %}
+                                <option value="{{market.id}}">{{market.title}}</option>
+                            {% endfor %}+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price_id">Price</label>
+                        <select class="form-control" id="price_id" name="price_id">
+                            {% for price in data.prices %}
+                                <option value="{{price.id}}">{{price.type.title}} - {{price.price}}</option>
+                            {% endfor %}+
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
+                    {{ csrf.field | raw }}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

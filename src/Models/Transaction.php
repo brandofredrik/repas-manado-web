@@ -21,4 +21,14 @@ class Transaction extends Model
 
     public $timestamps = false;
 
+    public function building()
+    {
+        return $this->belongsTo('App\Models\Merchant\Building');
+    }
+
+    // public function collector()
+    // {
+    //     return $this->belongsTo('App\Models\User');
+    // }
+
 }

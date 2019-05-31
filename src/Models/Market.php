@@ -15,4 +15,9 @@ class Market extends Model
 
     public $timestamps = false;
 
+    public function building()
+    {
+        return $this->hasMany('App\Models\Merchant\Building');
+    }
+
 }

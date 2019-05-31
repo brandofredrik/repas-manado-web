@@ -12,8 +12,9 @@ class CreateMerchantOwnerTable extends AbstractMigration
     {
         $merchant_owners = $this->table('merchant_owners');
         $merchant_owners->addColumn('name', 'string')
-            ->addColumn('identity_type', 'enum', ['values' => ['KTP', 'SIM']])
-            ->addColumn('identity_number', 'integer', ['limit' => 50, 'null' => false])
+            ->addColumn('identity_type', 'enum', ['values' => ['NONE','KTP', 'SIM']])
+            ->addColumn('identity_number', 'string')
+            ->addColumn('phone', 'string')
             ->save();
     }
 

@@ -3,8 +3,10 @@
 if (!function_exists('dd')) {
     function dd($string)
     {
+        echo '<pre>';
         var_dump($string);
         die();
+        echo '</pre>';
     }
 }
 

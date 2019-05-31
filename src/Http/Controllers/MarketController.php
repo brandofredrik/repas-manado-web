@@ -12,6 +12,9 @@ class MarketController extends Controller
 
     public function index($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $markets = Market::all();
         $data = [
             'path' => 'market',
@@ -22,6 +25,9 @@ class MarketController extends Controller
 
     public function show($request, $response, $args)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $id = $args['id'];
         $market = Market::findOrFail($id);
         return $response->withJson($market, 200);
@@ -29,6 +35,9 @@ class MarketController extends Controller
 
     public function store($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $validation = $this->validator->validate($request, [
             'title' => Validator::notEmpty(),
             'address' => Validator::notEmpty(),
@@ -52,6 +61,9 @@ class MarketController extends Controller
 
     public function update($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $market = Market::findOrFail($request->getParsedBody()['id']);
         if (!$market) {
             $this->flash->addMessage('error', "Failed update Market!");
@@ -70,6 +82,9 @@ class MarketController extends Controller
 
     public function delete($request, $response, $args)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $id = $args['id'];
         $market = Market::findOrFail($id);
         if ($market) {

@@ -11,7 +11,7 @@ class CreateMerchantBuildingTable extends AbstractMigration
     public function up()
     {
         $merchant_buildings = $this->table('merchant_buildings');
-        $merchant_buildings->addColumn('register_number', 'integer', ['limit' => 50, 'null' => false])
+        $merchant_buildings->addColumn('register_number', 'string')
             ->addColumn('name', 'string')
             ->addColumn('description', 'text')
             ->addColumn('widht', 'integer', ['limit' => MysqlAdapter::INT_TINY, 'null' => false]) // in meter

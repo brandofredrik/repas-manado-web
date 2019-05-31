@@ -12,4 +12,11 @@ class Role extends Model
 
     public $timestamps = false;
 
+    public function user() {
+        return $this->belongsToMany(
+            'App\Models\User',
+            'user_has_role'
+        );
+    }
+
 }

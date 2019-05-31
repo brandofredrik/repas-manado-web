@@ -8,12 +8,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Building\Price;
 use App\Models\Building\Type;
 
-
 class PriceController extends Controller
 {
 
     public function index($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $prices = Price::all();
         $types = Type::all();
         $data = [
@@ -27,6 +29,9 @@ class PriceController extends Controller
 
     public function show($request, $response, $args)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $id = $args['id'];
         $price = Price::findOrFail($id);
         return $response->withJson($price, 200);
@@ -34,6 +39,9 @@ class PriceController extends Controller
 
     public function store($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $validation = $this->validator->validate($request, [
             'title' => Validator::notEmpty(),
             'description' => Validator::notEmpty(),
@@ -54,6 +62,9 @@ class PriceController extends Controller
 
     public function update($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $price = price::findOrFail($request->getParsedBody()['id']);
         if (!$price) {
             $this->flash->addMessage('error', "Failed update Building Price!");
@@ -70,6 +81,9 @@ class PriceController extends Controller
 
     public function delete($request, $response, $args)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $id = $args['id'];
         $price = Price::findOrFail($id);
         if ($price) {

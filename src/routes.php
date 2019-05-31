@@ -50,17 +50,18 @@ $app->group('', function() {
     $this->post('/dashboard/buildings/prices/update', 'PriceController:update')->setName('dash.building.price.update');
 
     $this->get('/dashboard/merchant/owners', 'OwnerController:index')->setName('dash.merchant.owner');
-    // $this->get('/dashboard/merchant/owners/{id}/show', 'OwnerController:show')->setName('dash.merchant.owner.show');
-    // $this->get('/dashboard/merchant/owners/{id}/delete', 'OwnerController:delete')->setName('dash.merchant.owner.delete');
-    // $this->post('/dashboard/merchant/owners', 'OwnerController:store')->setName('dash.merchant.owner.store');
-    // $this->post('/dashboard/merchant/owners/update', 'OwnerController:update')->setName('dash.merchant.owner.update');
+    $this->get('/dashboard/merchant/owners/{id}/show', 'OwnerController:show')->setName('dash.merchant.owner.show');
+    $this->get('/dashboard/merchant/owners/{id}/delete', 'OwnerController:delete')->setName('dash.merchant.owner.delete');
+    $this->post('/dashboard/merchant/owners', 'OwnerController:store')->setName('dash.merchant.owner.store');
+    $this->post('/dashboard/merchant/owners/update', 'OwnerController:update')->setName('dash.merchant.owner.update');
 
     $this->get('/dashboard/merchant/buildings', 'BuildingController:index')->setName('dash.merchant.building');
-    // $this->get('/dashboard/merchant/buildings/{id}/show', 'BuildingController:show')->setName('dash.merchant.building.show');
-    // $this->get('/dashboard/merchant/buildings/{id}/delete', 'BuildingController:delete')->setName('dash.merchant.building.delete');
-    // $this->post('/dashboard/merchant/buildings', 'BuildingController:store')->setName('dash.merchant.building.store');
-    // $this->post('/dashboard/merchant/buildings/update', 'BuildingController:update')->setName('dash.merchant.building.update');
+    $this->get('/dashboard/merchant/buildings/{id}/show', 'BuildingController:show')->setName('dash.merchant.building.show');
+    $this->get('/dashboard/merchant/buildings/{id}/delete', 'BuildingController:delete')->setName('dash.merchant.building.delete');
+    $this->post('/dashboard/merchant/buildings', 'BuildingController:store')->setName('dash.merchant.building.store');
+    $this->post('/dashboard/merchant/buildings/update', 'BuildingController:update')->setName('dash.merchant.building.update');
 
+    $this->get('/dashboard/transactions', 'TransactionController:index')->setName('dash.transaction');
 
 
     $this->get('/logout', 'AuthController:getSignOut')->setName('auth.signout');

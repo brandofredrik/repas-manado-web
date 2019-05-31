@@ -10,7 +10,7 @@ class Auth
     public function user()
     {
         if (isset($_SESSION['user'])) {
-            return User::find($_SESSION['user']);
+            return User::with('role')->find($_SESSION['user']);
         }
         return false;
     }

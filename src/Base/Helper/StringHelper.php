@@ -36,3 +36,10 @@ if (!function_exists('randomString')) {
         return $randomString;
     }
 }
+
+if (!function_exists('isAdmin')) {
+    function isAdmin($admin)
+    {
+        return $admin == 1;
+    }
+}

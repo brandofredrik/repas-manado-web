@@ -12,6 +12,9 @@ class TypeController extends Controller
 
     public function index($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $types = Type::all();
         $data = [
             'path' => 'building',
@@ -23,6 +26,9 @@ class TypeController extends Controller
 
     public function show($request, $response, $args)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $id = $args['id'];
         $type = Type::findOrFail($id);
         return $response->withJson($type, 200);
@@ -30,6 +36,9 @@ class TypeController extends Controller
 
     public function store($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $validation = $this->validator->validate($request, [
             'title' => Validator::notEmpty(),
             'description' => Validator::notEmpty(),
@@ -49,6 +58,9 @@ class TypeController extends Controller
 
     public function update($request, $response)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $type = Type::findOrFail($request->getParsedBody()['id']);
         if (!$type) {
             $this->flash->addMessage('error', "Failed update Building Type!");
@@ -65,6 +77,9 @@ class TypeController extends Controller
 
     public function delete($request, $response, $args)
     {
+        if (!isAdmin($this->auth->user()->role[0]->id))
+            throw new \Slim\Exception\NotFoundException($request, $response);
+
         $id = $args['id'];
         $type = Type::findOrFail($id);
         if ($type) {

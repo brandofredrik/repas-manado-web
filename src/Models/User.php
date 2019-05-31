@@ -31,4 +31,16 @@ class User extends Model
         ]);
     }
 
+    public function role() {
+        return $this->belongsToMany(
+            'App\Models\Role',
+            'user_has_role'
+        );
+    }
+
+    // public function transaction()
+    // {
+    //     return $this->hasMany('App\Models\Transaction');
+    // }
+
 }

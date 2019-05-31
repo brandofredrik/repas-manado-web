@@ -23,7 +23,7 @@ $container['MarketController'] = function ($container) {
 };
 
 $container['TransactionController'] = function ($container) {
-    return new \App\Http\Controllers\MarketController($container);
+    return new \App\Http\Controllers\TransactionController($container);
 };
 
 $container['BuildingController'] = function ($container) {
