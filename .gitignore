@@ -3,3 +3,4 @@
 *.txt
 composer.lock
 .env
+/logs/*.log
