@@ -85,6 +85,21 @@ class TransactionController extends Controller
     public function store($request, $response)
     {
         $parsed_data = $request->getParsedBody();
+
+        $url = $this->router->pathFor(
+            'dash.transaction.collect',
+            [],
+            ['register_number' => $parsed_data['register_number']]
+        );
+
+        $transaction = Transaction::where('year', $parsed_data['year'] - 1)
+                                    ->where('building_id', $parsed_data['building_id'])
+                                    ->first();
+        if (!$transaction) {
+            $this->flash->addMessage('error', "Failed add transaction, Unpayed bill  on ". ($parsed_data['year'] - 1) ."!");
+            return $response->withRedirect($url);
+        }
+
         $data = [
             'title' => 'Pembayaran ruko',
             'building_id' => $parsed_data['building_id'],
@@ -101,15 +116,10 @@ class TransactionController extends Controller
 
         if (!$transactions) {
             $this->flash->addMessage('error', "Failed make transaction!");
-            return $response->withRedirect($this->router->pathFor('dash.home'));
+            return $response->withRedirect($url);
         }
 
         $this->flash->addMessage('info', "Success make transaction!");
-        $url = $this->router->pathFor(
-                    'dash.transaction.collect',
-                    [],
-                    ['register_number' => $parsed_data['register_number']]
-                );
         return $response->withRedirect($url);
     }
 
