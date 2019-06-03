@@ -7,7 +7,7 @@
         <!-- Page Heading -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Transaction list ({{data.transaction|length}})</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Transaction list ({{data.transactions|length}})</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -15,8 +15,10 @@
                         <thead>
                             <tr>
                                 <th rowspan="2" width="50">No</th>
-                                <th rowspan="2">Title</th>
-                                <th rowspan="2">Building Identity</th>
+                                <th rowspan="2">Register</th>
+                                <th rowspan="2">Type</th>
+                                <th rowspan="2">Market</th>
+                                <th rowspan="2">Collector</th>
                                 <th colspan="3" class="text-center">Payment</th>
                             </tr>
                             <tr>
@@ -26,39 +28,39 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {# {% for market in data.markets %}
+                            {% for transaction in data.transactions %}
                                 <tr>
-                                    <td>{{loop.index}}</td>
-                                    <td>{{market.title}}</td>
-                                    <td>{{market.address}}</td>
-                                    <td class="text-center">
-                                        <a
-                                            href="#"
-                                            class="btn btn-success btn-icon-split btn-sm"
-                                            data-toggle="modal"
-                                            data-target="#editMarket"
-                                            data-market="{{market.id}}"
-                                        >
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-edit fa-sm text-white-55"></i>
-                                            </span>
-                                            <span class="text"> edit</span>
-                                        </a>
-                                        <a
-                                            href="#"
-                                            class="btn btn-danger btn-icon-split btn-sm"
-                                            data-toggle="modal"
-                                            data-target="#deleteModal"
-                                            onclick="deleteData({{market.id}}, 'markets')"
-                                        >
-                                            <span class="icon text-white-50">
-                                                <i class="far fa-trash-alt fa-sm text-white-55"></i>
-                                            </span>
-                                            <span class="text"> delete</span>
-                                        </a>
+                                    <td>
+                                        {{loop.index}}
+                                    </td>
+                                    <td>
+                                        {{transaction.building.register_number}}
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-pill badge-info">
+                                            {{transaction.building.price.type.title}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{transaction.building.market.title}}
+                                    </td>
+                                    <td>
+                                        {% set username = transaction.collector.email|split('@') %}
+                                        {{username[0]}}
+                                    </td>
+                                    <td>
+                                        {{transaction.total}}
+                                    </td>
+                                    <td>
+                                         <span class="badge badge-pill badge-{{ (transaction.payment_status == 'FULL_PAY') ? 'success' : 'warning' }}">
+                                            {{transaction.payment_status}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{transaction.payment_time}}
                                     </td>
                                 </tr>
-                            {% endfor %} #}
+                            {% endfor %}
                         </thead>
                     </table>
                 </div>
@@ -67,8 +69,5 @@
 
     </div>
     <!-- /.container-fluid -->
-
-    {# {% include '/markets/add.twig' %} #}
-    {# {% include '/markets/edit.twig' %} #}
 
 {% endblock %}

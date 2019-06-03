@@ -107,8 +107,8 @@
         </div>
 
          <!-- Nav Item - collecting -->
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ (data.path == 'collecting') ? 'active' : ' '}}">
+            <a class="nav-link" href="{{ path_for('dash.transaction.collect') }}">
             <i class="fas fa-hand-holding-usd"></i>
             <span>Collecting</span></a>
         </li>

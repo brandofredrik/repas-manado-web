@@ -18,6 +18,8 @@ class CreateMerchantBuildingTable extends AbstractMigration
             ->addColumn('length', 'integer', ['limit' => MysqlAdapter::INT_TINY, 'null' => false]) // in meter
             ->addColumn('price_id', 'integer', ['null' => true])
             ->addColumn('market_id', 'integer', ['null' => true])
+            ->addColumn('due_day', 'string')
+            ->addColumn('due_month', 'string')
             ->addForeignKey('price_id', 'merchant_building_prices', 'id', ['delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'])
             ->addForeignKey('market_id', 'markets', 'id', ['delete'=> 'NO_ACTION', 'update'=> 'NO_ACTION'])
             ->save();

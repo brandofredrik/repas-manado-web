@@ -44,11 +44,14 @@ class BuildingController extends Controller
 
     public function show($request, $response, $args)
     {
-        if (!isAdmin($this->auth->user()->role[0]->id))
-            throw new \Slim\Exception\NotFoundException($request, $response);
+        // if (!isAdmin($this->auth->user()->role[0]->id))
+        //     throw new \Slim\Exception\NotFoundException($request, $response);
 
         $id = $args['id'];
-        $building = Building::with('owner')->findOrFail($id);
+        $building = Building::with('owner', 'market')
+        ->with(['price' => function($query) {
+            $query->with('type');
+        }])->where('id', $id)->first();
         return $response->withJson($building, 200);
     }
 
@@ -67,6 +70,8 @@ class BuildingController extends Controller
             'length' => $parsed_data->length,
             'price_id' => $parsed_data->price_id,
             'market_id' => $parsed_data->market_id,
+            'due_day'  =>  date('d', strtotime($parsed_data->due_date . ' 00:00:00')),
+            'due_month'  =>  date('m', strtotime($parsed_data->due_date . ' 00:00:00'))
         ];
 
         $building = Building::create($data);
@@ -106,6 +111,8 @@ class BuildingController extends Controller
             'length' => $parsed_data->length,
             'price_id' => $parsed_data->price_id,
             'market_id' => $parsed_data->market_id,
+            'due_day'  =>  date('d', strtotime($parsed_data->due_date . ' 00:00:00')),
+            'due_month'  =>  date('m', strtotime($parsed_data->due_date . ' 00:00:00'))
         ];
 
         $update = $building->update($data);

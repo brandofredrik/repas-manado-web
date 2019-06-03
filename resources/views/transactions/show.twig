@@ -1,0 +1,248 @@
+{% extends "/template/base.twig" %}
+{% block title %}Transaction{% endblock %}
+{% block body_content %}
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Building details</h1>
+        </div>
+
+        {% include '/template/partials/flash.twig' %}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        Owner
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Name </h5>
+                                <h5>Identity type </h5>
+                                <h5>Identity number </h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>: {{data.building.owner[0].name}}</h5>
+                                <h5>: {{data.building.owner[0].identity_type}}</h5>
+                                <h5>: {{data.building.owner[0].identity_number}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        Building
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Register number </h5>
+                                <h5>Name </h5>
+                                <h5>Description </h5>
+                                <h5>Market </h5>
+                                <h5>Type </h5>
+                                <h5>Widht </h5>
+                                <h5>Length </h5>
+                                <h5>Wide </h5>
+                                <h5>Payable</h5>
+                                <h5>Total Pay in year</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>: {{data.building.register_number}}</h5>
+                                <h5>: {{data.building.name}}</h5>
+                                <h5>: {{data.building.description}}</h5>
+                                <h5>: {{data.building.market.title}}</h5>
+                                <h5>: {{data.building.price.type.title}}</h5>
+                                <h5>: {{data.building.widht}}</h5>
+                                <h5>: {{data.building.length}}</h5>
+                                <h5>: {{data.building.widht * data.building.length}} (Widht*Length)</h5>
+                                <h5>: {{data.building.price.price}}</h5>
+                                <h5>: {{data.building.price.price * (data.building.widht * data.building.length)}}  (Wide*Payable)</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        History
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" width="50">No</th>
+                                        <th rowspan="2">Collector</th>
+                                        <th colspan="3" class="text-center">Payment</th>
+                                        <th rowspan="2">Action</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transaction in data.building.transaction %}
+                                        <tr>
+                                            <td>
+                                                {{loop.index}}
+                                            </td>
+                                            <td>
+                                                {% set username = transaction.collector.email|split('@') %}
+                                                {{username[0]}}
+                                            </td>
+                                            <td>
+                                                {{transaction.total}}
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pill badge-{{ (transaction.payment_status == 'FULL_PAY') ? 'success' : 'warning' }}">
+                                                    {{transaction.payment_status}}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {{transaction.payment_time}}
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="#"><i class="fas fa-print"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        Payment ({{date|date("Y")}})
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Payable </h5>
+                                <h5>Mulct </h5>
+                                <h5>Total </h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5>: {{data.building.price.price * (data.building.widht * data.building.length)}}</h5>
+                                <h5>:
+                                    {# buat validasi kalau bulan dng tanggal tahun ini so lewat kase denda #}
+                                    {# baru denda se baku tambah dengan total #}
+                                    {{data.building.price.mulct ?: 0}}
+                                </h5>
+                                <h5>: {{(data.building.price.price * (data.building.widht * data.building.length))}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-sm-flex align-items-center justify-content-between mb-4">
+                        <p></p>
+                        <a
+                            href="#"
+                            data-toggle="modal"
+                            data-target="#paymentModal"
+                            data-building="{{data.building.id}}"
+                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm ">
+                            <i class="fas fa-hand-holding-usd fa-sm text-white-50"></i>
+                            Pay
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+    {% include '/transactions/payment.twig' %}
+
+{% endblock %}
+
+
+{% block custom_script %}
+
+    <script>
+        $('#paymentModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var building = button.data('building')
+            var modal = $(this)
+            getBuildingDetailForPayment(building, modal)
+        })
+
+        async function getBuildingDetailForPayment(id, modal) {
+            try {
+                var apiUri = window.location.origin + '/dashboard/merchant/buildings/'+id+'/show'
+                const apiUrl = await(fetch(apiUri))
+                const building = await apiUrl.json()
+                showBuildingDetailForPayment(building, modal)
+            }
+            catch(err) { console.log(err); }
+        }
+
+        function showBuildingDetailForPayment(building, modal) {
+            let total = (building.price.price*(building.widht*building.length))
+            modal.find('.modal-body #building_id').val(building.id)
+            modal.find('.modal-body #payment_total').val(total)
+            modal.find('.modal-body #register_number').val(building.register_number)
+        }
+
+        function getPayment(year) {
+            if (year.value == 0) {
+                $('#payment_button').prop("disabled", true)
+                let container = document.querySelector('#payment_container')
+                let strAvailableData = `
+                    <h3 class="text-center">
+                        Silahkah pilih tahun
+                    </h3>
+                `
+                return container.innerHTML = strAvailableData
+            } else {
+                getPayableData('{{ data.building.id }}', year.value)
+            }
+        }
+
+        async function getPayableData(building_id, transaction_year) {
+            try {
+                var apiUri = window.location.origin + '/dashboard/transactions/'+building_id+'/'+transaction_year+'/payment'
+                const apiUrl = await(fetch(apiUri))
+                const data = await apiUrl.json()
+                paymentDetail(data)
+            }
+            catch(err) { console.log(err); }
+        }
+
+        function paymentDetail(data) {
+            let container = document.querySelector('#payment_container')
+            if(data.message == "payment_available") {
+                $('#payment_button').prop("disabled", false)
+                let strAvailableData = `
+                    <h5>
+
+                        Pembayaran : <span class="text-success"> Rp.`+data.data_building.price.price+`/meter </span>
+                        </br>
+                        Luas bangunan : <span class="text-info"> `+ (data.data_building.widht*data.data_building.length) +` </span>
+                        </br>
+                        Denda : <span class="text-warning"> 0 </span>
+                        </br>
+                        Total : <span class="text-success"> `+(data.data_building.price.price*(data.data_building.widht*data.data_building.length))+` </span>
+                    </h5>
+                `
+                return container.innerHTML = strAvailableData
+
+            } else {
+                $('#payment_button').prop("disabled", true)
+                let strAvailableData = `
+                    <h3 class="text-center">
+                        Tahun ini sudah dibayar
+                    </h3>
+                `
+                return container.innerHTML = strAvailableData
+
+            }
+        }
+
+    </script>
+{% endblock %}

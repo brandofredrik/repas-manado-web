@@ -7,7 +7,8 @@ class Transaction extends Model
 {
 
     protected $fillable = [
-        'date',
+        'title',
+        'year',
         'created_at',
         'building_id',
         'payable',
@@ -26,9 +27,9 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\Merchant\Building');
     }
 
-    // public function collector()
-    // {
-    //     return $this->belongsTo('App\Models\User');
-    // }
+    public function collector()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
 }

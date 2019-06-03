@@ -1,0 +1,43 @@
+<!-- Modal -->
+<div
+    class="modal fade"
+    id="paymentModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="paymentModal"
+    aria-hidden="true"
+>
+    <div class="modal-dialog" role="document">
+        <form action="{{ path_for('dash.transaction.store') }}"  method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModal">Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input name="building_id" id="building_id" type="hidden">
+                    <input name="payment_total" id="payment_total" type="hidden">
+                    <div class="form-group">
+                        <label for="register_number">Register number</label>
+                        <input name="register_number" id="register_number" type="text" class="form-control" readonly>
+                    </div>
+                    <select class="form-control" name="year" id="year" onchange="getPayment(this);">
+                        <option value="0">Select year</option>
+                        {% for i in "now"|date("Y").."now +10 years"|date("Y") %}
+                            <option value="{{  ("now +"~(loop.index-1)~" years")|date("Y") }}">{{  ("now +"~(loop.index-1)~" years")|date("Y") }}</option>
+                        {% endfor %}
+                    </select>
+                    <div id="payment_container" class="mt-3"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="payment_button" class="btn btn-primary" disabled>Pay</button>
+                    {{ csrf.field | raw }}
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

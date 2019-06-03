@@ -38,9 +38,9 @@ class User extends Model
         );
     }
 
-    // public function transaction()
-    // {
-    //     return $this->hasMany('App\Models\Transaction');
-    // }
+    public function transaction()
+    {
+        return $this->hasMany('App\Models\Transaction');
+    }
 
 }

@@ -16,6 +16,8 @@ class Building extends Model
         'length',
         'price_id',
         'market_id',
+        'due_day',
+        'due_month'
     ];
 
     public $timestamps = false;
@@ -37,9 +39,9 @@ class Building extends Model
         return $this->belongsTo('App\Models\Market');
     }
 
-    // public function transaction()
-    // {
-    //     return $this->hasMany('App\Models\Transaction');
-    // }
+    public function transaction()
+    {
+        return $this->hasMany('App\Models\Transaction');
+    }
 
 }

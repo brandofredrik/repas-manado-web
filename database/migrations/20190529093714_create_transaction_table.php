@@ -12,7 +12,7 @@ class CreateTransactionTable extends AbstractMigration
     {
         $transactions = $this->table('transactions');
         $transactions->addColumn('title', 'string')
-            ->addColumn('date', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'null' => true])
+            ->addColumn('year', 'string')
             ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'null' => true])
             ->addColumn('building_id', 'integer', ['null' => true])
             ->addColumn('payable', 'integer', ['limit' => 50, 'null' => false])

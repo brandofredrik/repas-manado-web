@@ -45,11 +45,12 @@
                                     <td>{{building.register_number}}</td>
                                     <td>{{building.owner[0].name}}</td>
                                     <td>{{building.price.type.title}}</td>
-                                    <td>{{building.widht * building.length}}</td>
+                                    <td>{{building.widht * building.length}}m</td>
                                     <td>{{building.market.title}}</td>
                                     <td>
                                         {# PAID, PAYABLE, #}
                                         <span class="badge badge-pill badge-warning">PAYABLE</span>
+                                        {# <span class="badge badge-pill badge-success">PAID</span> #}
                                     </td>
                                     <td class="text-center">
                                         <a
